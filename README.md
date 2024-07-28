@@ -30,6 +30,26 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 sudo docker run hello-world
 ```
 
+## Docker post install
+
+- https://docs.docker.com/engine/install/linux-postinstall/
+
+```bash
+sudo groupadd docker
+```
+
+```bash
+sudo usermod -aG docker $USER
+```
+
+```bash
+newgrp docker
+```
+
+```bash
+docker run hello-world
+```
+
 ## Install Compose plugin
 
 - https://docs.docker.com/compose/install/linux/
