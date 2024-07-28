@@ -42,3 +42,17 @@ sudo apt-get install docker-compose-plugin
 ```bash
 sudo docker compose version
 ```
+
+## Use Compose plugin
+
+- Start container
+
+```bash
+sudo docker compose up -d
+```
+
+- Stop container
+
+```bash
+sudo docker compose down
+```
