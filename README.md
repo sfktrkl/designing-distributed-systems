@@ -76,3 +76,28 @@ sudo docker compose up -d
 ```bash
 sudo docker compose down
 ```
+
+## Install Minikube
+
+- https://minikube.sigs.k8s.io/docs/start/?arch=%2Flinux%2Fx86-64%2Fstable%2Fbinary+download
+
+```bash
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+```
+
+```bash
+minikube start
+```
+
+```bash
+minikube kubectl -- get po -A
+```
+
+```bash
+alias kubectl="minikube kubectl --"
+```
+
+```bash
+kubectl cluster-info
+```
