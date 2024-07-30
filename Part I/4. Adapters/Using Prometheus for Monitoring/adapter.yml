@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: adapter
+  namespace: default
+  labels:
+    app: adapter
+spec:
+  containers:
+    - name: redis
+      image: redis
+      ports:
+        - containerPort: 6379
+          name: redis-port
+    - name: redis-exporter
+      image: oliver006/redis_exporter
+      ports:
+        - containerPort: 9121
+          name: exporter-port
