@@ -100,6 +100,42 @@ docker compose up -d
 docker compose down
 ```
 
+### How to view/delete/describe Kubernetes resources?
+
+```bash
+kubectl get po
+kubectl delete po pod-name
+kubectl describe po pod-name
+```
+
+```bash
+kubectl get svc
+kubectl delete svc service-name
+kubectl describe svc service-name
+```
+
+```bash
+kubectl get cm
+kubectl delete cm configmap-name
+kubectl describe cm configmap-name
+```
+
+```bash
+kubectl get deploy
+kubectl delete deploy deployment-name
+kubectl describe deploy deployment-name
+```
+
+### How to view Kubernetes logs?
+
+```bash
+kubectl logs pod-name
+```
+
+```bash
+kubectl logs pod-name -c container-name
+```
+
 ### How to push to Docker?
 
 ```bash

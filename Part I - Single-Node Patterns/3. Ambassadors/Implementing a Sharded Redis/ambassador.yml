@@ -4,10 +4,8 @@ metadata:
   name: ambassador
 spec:
   containers:
-    # Application container
     - name: nginx
       image: nginx
-    # Ambassador container
     - name: twemproxy
       image: malexer/twemproxy:latest
       command:
