@@ -101,3 +101,25 @@ alias kubectl="minikube kubectl --"
 ```bash
 kubectl cluster-info
 ```
+
+## Docker push
+
+```bash
+docker login
+```
+
+```bash
+docker build -t your-username/image-name:tag .
+```
+
+```bash
+docker images
+```
+
+```bash
+docker tag local-image:tag your-username/image-name:tag
+```
+
+```bash
+docker push your-username/image-name:tag
+```
