@@ -88,6 +88,30 @@ kubectl cluster-info
 sudo ln -s $(which minikube) /usr/local/bin/kubectl
 ```
 
+## Installation Steps for mkcert
+
+### Install [brew](https://brew.sh/)
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+```bash
+test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
+```
+
+### Install [mkcert](https://github.com/FiloSottile/mkcert)
+
+```bash
+sudo apt install libnss3-tools
+```
+
+```bash
+brew install mkcert
+```
+
 ## Other Helpful Commands
 
 ### How to use Compose plugin?
@@ -156,4 +180,14 @@ docker tag local-image:tag your-username/image-name:tag
 
 ```bash
 docker push your-username/image-name:tag
+```
+
+### How to create the local CA and certificate a domain in mkcert?
+
+```bash
+mkcert -install
+```
+
+```bash
+mkcert localhost
 ```
