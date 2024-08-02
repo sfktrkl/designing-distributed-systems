@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: shared-twemproxy-service
+spec:
+  selector:
+    app: shared-twemproxy
+  ports:
+    - name: memcache
+      protocol: TCP
+      port: 11211
+      targetPort: 11211
+    - name: twemproxy
+      protocol: TCP
+      port: 6222
+      targetPort: 6222
