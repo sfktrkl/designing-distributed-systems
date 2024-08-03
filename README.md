@@ -112,6 +112,52 @@ sudo apt install libnss3-tools
 brew install mkcert
 ```
 
+## Installation Steps for Knative
+
+### Install [cosign](https://docs.sigstore.dev/system_config/installation/)
+
+```bash
+brew install cosign
+
+```
+
+### Install [jq](https://jqlang.github.io/jq/download/)
+
+```bash
+sudo apt-get install jq
+```
+
+### Install [Knative](https://knative.dev/docs/install/yaml-install/serving/install-serving-with-yaml/#verifying-image-signatures)
+
+```bash
+curl -sSL https://github.com/knative/serving/releases/download/knative-v1.15.1/serving-core.yaml \
+  | grep 'gcr.io/' | awk '{print $2}' | sort | uniq \
+  | xargs -n 1 \
+    cosign verify -o text \
+      --certificate-identity=signer@knative-releases.iam.gserviceaccount.com \
+      --certificate-oidc-issuer=https://accounts.google.com
+```
+
+```bash
+kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.15.1/serving-crds.yaml
+kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.15.1/serving-core.yaml
+```
+
+```bash
+kubectl apply -f https://github.com/knative/net-kourier/releases/download/knative-v1.15.1/kourier.yaml
+```
+
+```bash
+kubectl patch configmap/config-network \
+  --namespace knative-serving \
+  --type merge \
+  --patch '{"data":{"ingress-class":"kourier.ingress.networking.knative.dev"}}'
+```
+
+```bash
+kubectl --namespace kourier-system get service kourier
+```
+
 ## Other Helpful Commands
 
 ### How to use Compose plugin?
