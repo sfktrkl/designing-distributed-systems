@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: experiment-config
+data:
+  nginx-web.conf: |
+    worker_rlimit_nofile 8192;
+    worker_processes 5;
+
+    events {
+        worker_connections 1024;
+    }
+
+    http {
+        server {
+            listen 8081;
+            location / {
+              return 200 "Hello from nginx-web!\n";
+              add_header Content-Type text/plain;
+            }
+        }
+    }
+  nginx-experiment.conf: |
+    worker_rlimit_nofile 8192;
+    worker_processes 5;
+
+    events {
+        worker_connections 1024;
+    }
+
+    http {
+        server {
+            listen 8082;
+            location / {
+              return 200 "Hello from nginx-experiment!\n";
+              add_header Content-Type text/plain;
+            }
+        }
+    }
+  nginx.conf: |
+    worker_rlimit_nofile 8192;
+    worker_processes 5;
+
+    events {
+        worker_connections 1024;
+    }
+
+    http {
+        upstream backend {
+            # ip_hash; # to test
+            server localhost:8081 weight=5;
+            server localhost:8082 weight=5;
+        }
+
+        server {
+            listen 8080;
+            location / {
+                proxy_pass http://backend;
+            }
+        }
+    }

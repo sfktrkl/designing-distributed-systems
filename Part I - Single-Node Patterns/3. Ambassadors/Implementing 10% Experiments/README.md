@@ -1,14 +1,12 @@
-## Delete local cluster
+### Implementing 10% Experiments
 
 ```bash
-minikube delete
-```
-
-### Manual
-
-```bash
-kubectl create configmap experiment-config --from-file=nginx.conf
+kubectl create -f experiment-config.yml
 kubectl create -f experiment.yml
-kubectl create -f prod.yml
-kubectl create -f ambassador.yml
 ```
+
+```bash
+kubectl port-forward experiment 30080:8080
+```
+
+- Go to localhost:30080 and refresh the page.
