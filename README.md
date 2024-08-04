@@ -158,6 +158,18 @@ kubectl patch configmap/config-network \
 kubectl --namespace kourier-system get service kourier
 ```
 
+## Installation Steps for etcd
+
+### Install [etcd](https://etcd.io/docs/v3.5/install/)
+
+```bash
+brew install etcd
+```
+
+```bash
+etcd --version
+```
+
 ## Other Helpful Commands
 
 ### How to use Compose plugin?
