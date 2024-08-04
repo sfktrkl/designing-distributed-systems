@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: etcd
+spec:
+  serviceName: "etcd"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: etcd
+  template:
+    metadata:
+      labels:
+        app: etcd
+    spec:
+      containers:
+        - name: etcd
+          image: bitnami/etcd
+          volumeMounts:
+            - name: etcd-data
+              mountPath: /var/lib/etcd
+            - name: etcd-config
+              mountPath: /etc/etcd
+              subPath: etcd.conf.yml
+          env:
+            - name: ALLOW_NONE_AUTHENTICATION
+              value: "yes"
+      volumes:
+        - name: etcd-config
+          configMap:
+            name: etcd-config
+  volumeClaimTemplates:
+    - metadata:
+        name: etcd-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
